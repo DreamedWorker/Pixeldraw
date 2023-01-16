@@ -4,11 +4,8 @@ import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -40,22 +37,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dream.pixeldraw.activity.AboutActivity;
 import com.dream.pixeldraw.activity.FileActivity;
 import com.dream.pixeldraw.activity.FileSaveActivity;
-import com.dream.pixeldraw.activity.SettingActivity;
 import com.dream.pixeldraw.adapter.ColorListAdapter;
 import com.dream.pixeldraw.adapter.Listeners;
 import com.dream.pixeldraw.ui.PixelPicView;
 import com.dream.pixeldraw.ui.SettingDialog;
-import com.dream.pixeldraw.ui.WarningDialog;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 @TargetApi(Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
@@ -70,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private float pixel_size_0;
     public ImageButton button_pen,button_drawpen,button_eraser,button_bucket,button_colorpicker,b_line,b_square,b_square_hol,b_circle,b_circle_hol,return_button,undo_button;
     public DisplayMetrics displayMetrics=new DisplayMetrics();
-    public ColorListAdapter colorListAdapter=new ColorListAdapter(this,new ArrayList<Integer>());
+    public ColorListAdapter colorListAdapter=new ColorListAdapter(new ArrayList<>(), this);
     public Color al_color=Color.valueOf(00000000);
     public int color_picked;
     public static MainActivity instance;
@@ -192,12 +185,10 @@ public class MainActivity extends AppCompatActivity {
                 ImageButton button_settings=mainView.findViewById(R.id.button4);
                 button_select=bottomView.findViewById(R.id.button_select);
                 button_select.setOnClickListener(Listeners.selectListener);
-                button_settings.setOnClickListener(new View.OnClickListener(){
+                button_settings.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        Intent intent=new Intent();
-                        intent.setClass(MainActivity.this, SettingActivity.class);
-                        startActivity(intent);
+                    public void onClick(View v) {
+                        startActivity(new Intent(getApplicationContext(), AboutActivity.class));
                     }
                 });
                 button_A.setOnClickListener(new View.OnClickListener() {
@@ -402,21 +393,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @Override
-    public Resources getResources() {
-        Resources res=super.getResources();
-        if(AppGlobalData.DEFAULT_DPI!=AppGlobalData.DENSITY_DPI) {
-            Configuration conf = res.getConfiguration();
-            conf.densityDpi = AppGlobalData.DENSITY_DPI;
-            res.updateConfiguration(conf, displayMetrics);
-        }
-        if(AppGlobalData.DEFAULT_FONT_SIZE!=AppGlobalData.FONT_SIZE){
-            Configuration conf=res.getConfiguration();
-            conf.fontScale=AppGlobalData.FONT_SIZE;
-            res.updateConfiguration(conf,displayMetrics);
-        }
-        return res;
-    }
     float[] startX= new float[2];
     float[] startY= new float[2];
     float[] orginal_pos=new float[2];

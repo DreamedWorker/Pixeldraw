@@ -22,8 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".AppService" />
-        <activity android:name=".activity.SettingActivity" />
+
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.FileSaveActivity" />
         <activity android:name=".activity.FileActivity" />

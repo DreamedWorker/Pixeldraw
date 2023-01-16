@@ -97,20 +97,5 @@ public class FileActivity extends Activity {
         }
         return new SimpleAdapter(FileActivity.this,maps,R.layout.list_theme,new String[]{"name","icon"},new int[]{R.id.name,R.id.icon});
     }
-    @Override
-    public Resources getResources() {
-        Resources res=super.getResources();
-        if(AppGlobalData.DEFAULT_DPI!=AppGlobalData.DENSITY_DPI) {
-            Configuration conf = res.getConfiguration();
-            conf.densityDpi = AppGlobalData.DENSITY_DPI;
-            res.updateConfiguration(conf, super.getResources().getDisplayMetrics());
-        }
-        if(AppGlobalData.DEFAULT_FONT_SIZE!=AppGlobalData.FONT_SIZE){
-            Configuration conf=res.getConfiguration();
-            conf.fontScale=AppGlobalData.FONT_SIZE;
-            res.updateConfiguration(conf,super.getResources().getDisplayMetrics());
-        }
-        return res;
-    }
 
 }

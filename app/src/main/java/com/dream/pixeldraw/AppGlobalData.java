@@ -24,10 +24,6 @@ import androidx.annotation.RequiresApi;
 public abstract class AppGlobalData {
     public static Context MAIN_CONTEXT;
     public static MainActivity MA_INSTANCE;
-    public static int DENSITY_DPI;
-    public static int DEFAULT_DPI;
-    public static float FONT_SIZE;
-    public static float DEFAULT_FONT_SIZE;
     public static ArrayList<Bitmap> Plates=new ArrayList<>();
     public static ArrayList<Bitmap> Saved_Plates=new ArrayList<>();
     public static Bitmap colorful_bar;
@@ -35,16 +31,13 @@ public abstract class AppGlobalData {
     public static Bitmap alpha_plane=Bitmap.createBitmap(870,300,Bitmap.Config.ARGB_8888);
     public static Bitmap brightness_plane=Bitmap.createBitmap(870,300,Bitmap.Config.ARGB_8888);
     public static Bitmap copied_pic;
-    private static File conf_file,bitmap_file,collection_file;
+    private static File bitmap_file,collection_file;
     private static Drawable black;
     private static Drawable white;
     public static void initailizeData(){
-        conf_file=new File(MAIN_CONTEXT.getFilesDir().getAbsolutePath()+"/config.cfg");
         bitmap_file=new File(MAIN_CONTEXT.getFilesDir().getAbsolutePath()+"/recent.png");
         collection_file=new File(MAIN_CONTEXT.getFilesDir().getAbsolutePath()+"/color.txt");
         MA_INSTANCE.getWindowManager().getDefaultDisplay().getMetrics(MA_INSTANCE.displayMetrics);
-        DEFAULT_DPI=MA_INSTANCE.displayMetrics.densityDpi;
-        DEFAULT_FONT_SIZE=1;
         try {
             if(!bitmap_file.exists()){
                 bitmap_file.createNewFile();
@@ -53,42 +46,15 @@ public abstract class AppGlobalData {
                 os.flush();
                 os.close();
             }
-            if (!conf_file.exists()) {
-                DENSITY_DPI=DEFAULT_DPI;
-                FONT_SIZE=DEFAULT_FONT_SIZE;
-                conf_file.createNewFile();
-            }
             if(!collection_file.exists()){
                 collection_file.createNewFile();
-            }
-            else {
-                if (conf_file.length() == 0) {
-                    FileWriter writer = new FileWriter(conf_file);
-                    writer.write( DENSITY_DPI+ ",");
-                    writer.write(FONT_SIZE+",");
-                    writer.write("0");
-                    writer.close();
-                    loadData();
-                } else loadData();
             }
         }catch (IOException e){
             e.printStackTrace();
         }
 
     }
-    private static void loadData() throws IOException{
-        conf_file=new File(MAIN_CONTEXT.getFilesDir().getPath()+"/config.cfg");
-        FileReader reader = new FileReader(conf_file);
-        int len;
-        String res="";
-        while ((len= reader.read())!=-1)
-            res+=(char)len;
-        reader.close();
-        Log.d(TAG,res);
-        String[] strings=res.split(",");
-        DENSITY_DPI=Integer.parseInt(strings[0]);
-        FONT_SIZE=Float.parseFloat(strings[1]);
-    }
+
     public static void addColColors(int color){
         try {
             FileWriter fw=new FileWriter(collection_file);
@@ -124,17 +90,7 @@ public abstract class AppGlobalData {
         for(int i=0;i<res.length;i++) res[i]=colors.get(i);
         return res;
     }
-    public static void updateData(){
-        try {
-            FileWriter writer = new FileWriter(conf_file);
-            writer.write( DENSITY_DPI+ ",");
-            writer.write(FONT_SIZE+",");
-            writer.write("0");
-            writer.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static Bitmap initColorfulBar(){
         //color

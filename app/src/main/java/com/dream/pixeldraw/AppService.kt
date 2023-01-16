@@ -1,25 +1,19 @@
-package com.dream.pixeldraw;
+package com.dream.pixeldraw
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
+import android.app.Service
+import android.content.Intent
+import android.os.IBinder
 
-import androidx.annotation.Nullable;
-
-public class AppService extends Service {
-    @Override
-    public void onCreate() {
-        super.onCreate();
+class AppService : Service() {
+    override fun onCreate() {
+        super.onCreate()
     }
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+    override fun onBind(intent: Intent): IBinder? {
+        return null
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
