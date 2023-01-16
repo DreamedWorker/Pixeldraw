@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,11 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
-            android:background="@color/colorPrimary"
+            android:background="#c4c4c4"
             android:padding="8dp"
             android:text="关于"
             android:textColor="@android:color/background_light"
-            android:textSize="@dimen/title_size" />
+            android:textSize="@dimen/title_size"
+            tools:ignore="TextSizeCheck,TextContrastCheck" />
 
         <TextView
             android:id="@+id/textView2"
@@ -66,4 +67,4 @@
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

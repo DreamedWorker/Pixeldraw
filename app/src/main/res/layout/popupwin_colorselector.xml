@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="245dp"
@@ -46,17 +46,18 @@
                     android:id="@+id/colorviewer"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="0.3"
                     android:background="?android:attr/colorBackground"
                     android:cursorVisible="false"
                     android:filterTouchesWhenObscured="false"
+                    android:focusable="false"
                     android:gravity="center"
                     android:inputType="text"
-                    android:focusable="false"
                     android:textColor="@android:color/background_light"
-                    android:textSize="@dimen/text_size" />
+                    android:textSize="@dimen/text_size"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             </LinearLayout>
 
@@ -114,9 +115,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/sel_button_left"
-                android:text="确定"
+                android:text="@string/dialog_enable_confirm"
                 android:textColor="@color/background_grey"
-                android:textSize="@dimen/button_text_size" />
+                android:textSize="14sp"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/button_no"
@@ -124,10 +126,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/sel_button_right"
-                android:text="取消"
+                android:text="@string/app_cancel"
                 android:textColor="@color/background_grey"
-                android:textSize="@dimen/button_text_size" />
+                android:textSize="14sp"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

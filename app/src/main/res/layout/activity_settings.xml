@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,11 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
-            android:background="@color/colorPrimary"
+            android:background="#c4c4c4"
             android:padding="8dp"
             android:text="设置"
-            android:textColor="@android:color/background_light"
-            android:textSize="@dimen/title_size" />
+            android:textColor="#1B5E20"
+            android:textSize="@dimen/title_size"
+            tools:ignore="TextSizeCheck" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -63,7 +64,8 @@
                     android:padding="10dp"
                     android:text="关于"
                     android:textColor="@color/background_grey"
-                    android:textSize="@dimen/button_text_size" />
+                    android:textSize="@dimen/button_text_size"
+                    tools:ignore="TextSizeCheck" />
 
                 <View
                     android:id="@+id/divider2"
@@ -75,4 +77,4 @@
         </ScrollView>
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

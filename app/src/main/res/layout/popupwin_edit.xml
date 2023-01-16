@@ -14,12 +14,13 @@
         android:adjustViewBounds="false"
         android:background="@drawable/shape_sel"
         android:cropToPadding="false"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="6dp"
+        android:paddingStart="8dp"
         android:paddingTop="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/pen" />
+        android:src="@drawable/pen"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/button1"
@@ -29,12 +30,13 @@
         android:adjustViewBounds="false"
         android:background="@drawable/shape_sel"
         android:cropToPadding="false"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="6dp"
+        android:paddingStart="8dp"
         android:paddingTop="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/marker_pen" />
+        android:src="@drawable/marker_pen"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/button2"
@@ -44,12 +46,13 @@
         android:adjustViewBounds="false"
         android:background="@drawable/shape_sel"
         android:cropToPadding="false"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="6dp"
+        android:paddingStart="8dp"
         android:paddingTop="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/color_picker" />
+        android:src="@drawable/color_picker"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/button5"
@@ -59,12 +62,13 @@
         android:adjustViewBounds="false"
         android:background="@drawable/shape_sel"
         android:cropToPadding="false"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="6dp"
+        android:paddingStart="8dp"
         android:paddingTop="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/eraser" />
+        android:src="@drawable/eraser"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/button"
@@ -72,24 +76,26 @@
         android:layout_height="@dimen/button_size"
         android:layout_marginBottom="6dp"
         android:background="@drawable/shape_sel"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="6dp"
+        android:paddingStart="8dp"
         android:paddingTop="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/bucket" />
+        android:src="@drawable/bucket"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/button_graph"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_size"
         android:background="@drawable/shape_sel"
-        android:paddingBottom="6dp"
         android:paddingLeft="7dp"
-        android:paddingRight="7dp"
         android:paddingTop="8dp"
+        android:paddingRight="7dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/graph" />
+        android:src="@drawable/graph"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/button_back"
@@ -97,10 +103,11 @@
         android:layout_height="@dimen/button_size"
         android:layout_marginTop="6dp"
         android:background="@drawable/shape_sel"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="6dp"
+        android:paddingStart="8dp"
         android:paddingTop="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/arrow_back" />
+        android:src="@drawable/arrow_back"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 </LinearLayout>

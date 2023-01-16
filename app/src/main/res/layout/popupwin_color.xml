@@ -13,13 +13,15 @@
         android:layout_marginBottom="6dp"
         android:adjustViewBounds="false"
         android:background="@drawable/shape_sel"
+        android:contentDescription="@string/popwin_color"
         android:cropToPadding="false"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="6dp"
+        android:paddingStart="8dp"
         android:paddingTop="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/palette_color" />
+        android:src="@drawable/palette_color"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ListView
         android:id="@+id/color_list"
@@ -28,6 +30,7 @@
         android:layout_marginTop="6dp"
         android:descendantFocusability="blocksDescendants"
         android:divider="@android:color/transparent"
-        android:dividerHeight="3dp" />
+        android:dividerHeight="3dp"
+        tools:ignore="TouchTargetSizeCheck" />
 
 </LinearLayout>

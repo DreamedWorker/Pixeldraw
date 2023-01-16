@@ -1,11 +1,14 @@
-# Pixeldraw
+# Pixel-draw
+
 ## Introduction
 An application that allows you to draw pixel pictures mainly for Minecraft.
-## Infomation
+
+## Information
+### Previous developers
 - main developer: [DexerMatters](https://github.com/DexerMatters)
 - auxiliary developer: [hyx123251](https://github.com/hyx123251)
-- current version: 0.01 alpha
-- contact: dexermatters@gmail.com or 2353708378@qq.com  
+- current version: 
+- contact:  
 ## Features
 - Open and save pictures freely.
 - A lot of drawing functions.

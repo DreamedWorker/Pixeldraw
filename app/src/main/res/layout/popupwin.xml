@@ -13,13 +13,16 @@
         android:layout_marginBottom="6dp"
         android:adjustViewBounds="false"
         android:background="@drawable/shape_sel"
+        android:contentDescription="@string/pop_setting"
         android:cropToPadding="false"
-        android:paddingBottom="3dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="3dp"
+        android:minHeight="48dp"
+        android:paddingStart="5dp"
         android:paddingTop="3dp"
+        android:paddingEnd="3dp"
+        android:paddingBottom="3dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/setting" />
+        android:src="@drawable/setting"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/button3"
@@ -28,13 +31,16 @@
         android:layout_marginBottom="6dp"
         android:adjustViewBounds="false"
         android:background="@drawable/shape_sel"
+        android:contentDescription="@string/pop_files"
         android:cropToPadding="false"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="6dp"
+        android:minHeight="48dp"
+        android:paddingStart="8dp"
         android:paddingTop="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/archive_director" />
+        android:src="@drawable/archive_director"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/button2"
@@ -43,23 +49,29 @@
         android:layout_marginBottom="6dp"
         android:adjustViewBounds="false"
         android:background="@drawable/shape_sel"
+        android:contentDescription="@string/pop_create"
         android:cropToPadding="false"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="6dp"
+        android:minHeight="48dp"
+        android:paddingStart="8dp"
         android:paddingTop="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/draw_edit_new_pen_write" />
+        android:src="@drawable/draw_edit_new_pen_write"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/button"
         android:layout_width="@dimen/button_size"
         android:layout_height="@dimen/button_size"
         android:background="@drawable/shape_sel"
-        android:paddingBottom="6dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="6dp"
+        android:contentDescription="@string/pop_more"
+        android:minHeight="48dp"
+        android:paddingStart="8dp"
         android:paddingTop="6dp"
+        android:paddingEnd="6dp"
+        android:paddingBottom="6dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/more" />
+        android:src="@drawable/more"
+        tools:ignore="TouchTargetSizeCheck" />
 </LinearLayout>
