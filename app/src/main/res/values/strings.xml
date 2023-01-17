@@ -23,4 +23,6 @@
     <string name="about">关于</string>
     <string name="choose_back">回退</string>
     <string name="choose_path">Path</string>
+    <string name="save_name">文件名（无需拓展名）</string>
+    <string name="save_confirm">保存</string>
 </resources>

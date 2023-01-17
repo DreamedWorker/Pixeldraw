@@ -40,7 +40,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 import com.dream.pixeldraw.activity.AboutActivity;
 import com.dream.pixeldraw.activity.FileChooseActivity;
-import com.dream.pixeldraw.activity.FileSaveActivity;
+import com.dream.pixeldraw.activity.SaveFileActivity;
 import com.dream.pixeldraw.adapter.ColorListAdapter;
 import com.dream.pixeldraw.adapter.Listeners;
 import com.dream.pixeldraw.ui.PixelPicView;
@@ -316,55 +316,38 @@ public class MainActivity extends AppCompatActivity {
                         });
                     }
                 });
-                button_B.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                button_B.setOnClickListener(view -> {
 
-                        fileWin=showMainPopWindow(R.layout.popupwin_file);
-                        View con=fileWin.getContentView();
-                        ImageButton button_back=con.findViewById(R.id.button_back__),
-                                button_open_file=con.findViewById(R.id.button_open_file),
-                                button_save=con.findViewById(R.id.button_save),
-                                button_save_as=con.findViewById(R.id.button_save_as),
-                                button_new_file=con.findViewById(R.id.button_new_file);
-                        button_back.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                mainWin.showAtLocation(getWindow().getDecorView(), Gravity.TOP | Gravity.START, 20, 20);
-                                fileWin.dismiss();
-                            }
-                        });
-                        button_new_file.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                showNewFileDialog();
-                            }
-                        });
+                    fileWin=showMainPopWindow(R.layout.popupwin_file);
+                    View con=fileWin.getContentView();
+                    ImageButton button_back=con.findViewById(R.id.button_back__),
+                            button_open_file=con.findViewById(R.id.button_open_file),
+                            button_save=con.findViewById(R.id.button_save),
+                            button_save_as=con.findViewById(R.id.button_save_as),
+                            button_new_file=con.findViewById(R.id.button_new_file);
+                    button_back.setOnClickListener(view15 -> {
+                        mainWin.showAtLocation(getWindow().getDecorView(), Gravity.TOP | Gravity.START, 20, 20);
+                        fileWin.dismiss();
+                    });
+                    button_new_file.setOnClickListener(view14 -> showNewFileDialog());
 
-                        button_save.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if(pathStr!=null) {
-                                    saveImage();
-                                    Toast.makeText(MainActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
-                                }
-                                else{
-                                        pathStr = Environment.getExternalStorageDirectory().getPath();
-                                        startActivity(new Intent(MainActivity.this, FileSaveActivity.class));
-                                    }
+                    button_save.setOnClickListener(view13 -> {
+                        if(pathStr!=null) {
+                            saveImage();
+                            Toast.makeText(MainActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                                pathStr = Environment.getExternalStorageDirectory().getPath();
+                                startActivity(new Intent(MainActivity.this, SaveFileActivity.class));
                             }
-                        });
-                        button_save_as.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if(pathStr!=null) {
-                                    startActivity(new Intent(MainActivity.this, FileSaveActivity.class));
-                                }else pathStr=Environment.getExternalStorageDirectory().getPath();
-                            }
-                        });
-                        button_open_file.setOnClickListener(view1 -> startActivity(new Intent(MainActivity.this, FileChooseActivity.class)));
-                        mainWin.dismiss();
-                    }
+                    });
+                    button_save_as.setOnClickListener(view12 -> {
+                        if(pathStr!=null) {
+                            startActivity(new Intent(MainActivity.this, SaveFileActivity.class));
+                        }else pathStr=Environment.getExternalStorageDirectory().getPath();
+                    });
+                    button_open_file.setOnClickListener(view1 -> startActivity(new Intent(MainActivity.this, FileChooseActivity.class)));
+                    mainWin.dismiss();
                 });
             }
         });
