@@ -40,7 +40,7 @@ class FileChooseActivity : AppCompatActivity() {
                 } else if (File(globalList[position]).isFile){
                     if (singleFile.contains("png")){
                         pathStr = binding.choosePath.text.toString() + "/" + singleFile
-                        AppGlobalData.MA_INSTANCE.onRead()
+                        AppGlobalData.MA_INSTANCE.onRead(pathStr)
                         finish()
                     }
                 }
@@ -70,7 +70,7 @@ class FileChooseActivity : AppCompatActivity() {
                         } else if (File(partList[position]).isFile){
                             if (singleFile.contains("png")){
                                 pathStr = binding.choosePath.text.toString() + "/" + singleFile
-                                AppGlobalData.MA_INSTANCE.onRead()
+                                AppGlobalData.MA_INSTANCE.onRead(pathStr)
                                 finish()
                             }
                         }

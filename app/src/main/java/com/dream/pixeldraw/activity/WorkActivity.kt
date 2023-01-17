@@ -77,7 +77,7 @@ class WorkActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     var alColor = Color.valueOf(0)
     var colorPicked = 0
-    var pathStr: String = Environment.getExternalStorageDirectory().absolutePath
+    @JvmField var pathStr: String? = null
     var penColor: Int = -0x1000000
     var enableMove = true
     var mainWin: PopupWindow? = null
@@ -375,9 +375,10 @@ class WorkActivity : AppCompatActivity() {
         return b
     }
 
-    fun saveImage() {
+    fun saveImage(newPath: String) {
         try {
-            val saveFile = File(pathStr)
+            pathStr = newPath
+            val saveFile = File(newPath)
             if (!saveFile.exists()) saveFile.createNewFile()
             val outputStream = FileOutputStream(saveFile)
             pic.bitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream)
@@ -389,7 +390,7 @@ class WorkActivity : AppCompatActivity() {
     }
 
     fun showNewFileDialog() {
-        pathStr = ""
+        pathStr = null
         val editText = AppCompatEditText(this@WorkActivity)
         editText.hint = "图像大小"
         editText.textSize = 14f
@@ -411,16 +412,19 @@ class WorkActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun onRead() {
+    fun onRead(newPath: String) {
         Toast.makeText(applicationContext, "打开中", Toast.LENGTH_SHORT).show()
-        if (File(pathStr).exists()) {
-            bitmap = BitmapFactory.decodeFile(pathStr)
-            if (bitmap != null) pic.setInitBitmap(bitmap) else Toast.makeText(
-                applicationContext,
-                "打开失败",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else Toast.makeText(applicationContext, "打开失败", Toast.LENGTH_SHORT).show()
+        if (File(newPath).exists()) {
+            bitmap = BitmapFactory.decodeFile(newPath)
+            if (bitmap != null){
+                pic.setInitBitmap(bitmap)
+                pathStr = newPath
+            } else {
+                Toast.makeText(applicationContext, "打开失败", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(applicationContext, "打开失败", Toast.LENGTH_SHORT).show()
+        }
     }
 
     @Suppress("NAME_SHADOWING")
@@ -649,7 +653,7 @@ class WorkActivity : AppCompatActivity() {
                 buttonNewFile.setOnClickListener { showNewFileDialog() }
                 buttonSave.setOnClickListener {
                     if (pathStr != null) {
-                        saveImage()
+                        saveImage(pathStr!!)
                         Toast.makeText(applicationContext, "保存成功", Toast.LENGTH_SHORT).show()
                     } else {
                         pathStr = Environment.getExternalStorageDirectory().path

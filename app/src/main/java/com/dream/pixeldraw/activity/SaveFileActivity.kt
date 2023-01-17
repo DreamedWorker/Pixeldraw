@@ -58,7 +58,7 @@ class SaveFileActivity : AppCompatActivity() {
     private fun dealSave() {
         binding.saveConfirm.setOnClickListener {
             pathStr = pathStr + "/" + binding.saveName.text.toString() + ".png"
-            AppGlobalData.MA_INSTANCE.saveImage()
+            AppGlobalData.MA_INSTANCE.saveImage(pathStr)
             Toast.makeText(applicationContext, "储存为：${pathStr}", Toast.LENGTH_SHORT).show()
             finish()
         }
