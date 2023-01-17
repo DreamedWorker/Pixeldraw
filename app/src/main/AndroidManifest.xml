@@ -19,22 +19,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pixeldraw"
         tools:targetApi="33">
-        <activity
-            android:name=".activity.SaveFileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.FileChooseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.Pixeldraw">
+        <activity android:name=".activity.WorkActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.SaveFileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.FileChooseActivity"
+            android:exported="false" />
 
         <service android:name=".AppService" />
 

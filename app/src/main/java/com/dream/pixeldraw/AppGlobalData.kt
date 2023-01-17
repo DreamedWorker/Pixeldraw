@@ -12,6 +12,7 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
+import com.dream.pixeldraw.activity.WorkActivity
 import java.io.File
 import java.io.FileOutputStream
 import java.io.FileWriter
@@ -20,7 +21,7 @@ import java.io.IOException
 @SuppressLint("StaticFieldLeak")
 object AppGlobalData {
     lateinit var MAIN_CONTEXT: Context
-    lateinit var MA_INSTANCE: MainActivity
+    lateinit var MA_INSTANCE: WorkActivity
     @JvmField
     var Plates = ArrayList<Bitmap>()
     @JvmField
@@ -40,7 +41,7 @@ object AppGlobalData {
     private var white: Drawable? = null
     @Suppress("DEPRECATION")
     @JvmStatic
-    fun initailizeData(mContext: Context, activity: MainActivity) {
+    fun initailizeData(mContext: Context, activity: WorkActivity) {
         MAIN_CONTEXT = mContext
         MA_INSTANCE = activity
         bitmap_file = File(MAIN_CONTEXT.filesDir.absolutePath + "/recent.png")

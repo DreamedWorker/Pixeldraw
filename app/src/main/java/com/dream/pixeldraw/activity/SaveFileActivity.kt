@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dream.mstudio.helper.FileHandle
 import com.dream.pixeldraw.AppGlobalData
-import com.dream.pixeldraw.MainActivity
 import com.dream.pixeldraw.adapter.FileChooseAdapter
 import com.dream.pixeldraw.databinding.ActivitySaveFileBinding
 import java.io.File
@@ -58,9 +57,9 @@ class SaveFileActivity : AppCompatActivity() {
 
     private fun dealSave() {
         binding.saveConfirm.setOnClickListener {
-            MainActivity.pathStr = pathStr + "/" + binding.saveName.text.toString() + ".png"
-            AppGlobalData.MA_INSTANCE?.saveImage()
-            Toast.makeText(applicationContext, "储存为：${MainActivity.pathStr}", Toast.LENGTH_SHORT).show()
+            pathStr = pathStr + "/" + binding.saveName.text.toString() + ".png"
+            AppGlobalData.MA_INSTANCE.saveImage()
+            Toast.makeText(applicationContext, "储存为：${pathStr}", Toast.LENGTH_SHORT).show()
             finish()
         }
     }

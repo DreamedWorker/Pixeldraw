@@ -57,8 +57,8 @@ public class PixelPicView extends View {
         l.width=MA_INSTANCE.dip2px(300);
         l.height= ((int) (MA_INSTANCE.dip2px(300) * ((float) heightPixels / (float) widthPixels)));
         l.gravity=Gravity.CENTER;
-        setX(MA_INSTANCE.displayMetrics.widthPixels/2-getMeasuredWidth()/2);
-        setY(MA_INSTANCE.displayMetrics.heightPixels/2-getMeasuredHeight()/2);
+        setX(MA_INSTANCE.getDisplayMetrics().widthPixels/2-getMeasuredWidth()/2);
+        setY(MA_INSTANCE.getDisplayMetrics().heightPixels/2-getMeasuredHeight()/2);
         setScaleX(1);
         setScaleY(1);
         setLayoutParams(l);
@@ -200,11 +200,11 @@ public class PixelPicView extends View {
     }
     public void loadHistoryBitmap(){
         Plates.add(getBitmap());
-        if(MA_INSTANCE.undo_button.getVisibility()==VISIBLE){
-            MA_INSTANCE.undo_button.setVisibility(INVISIBLE);
+        if(MA_INSTANCE.undoButton.getVisibility()==VISIBLE){
+            MA_INSTANCE.undoButton.setVisibility(INVISIBLE);
         }
         Saved_Plates=new ArrayList<>();
-        MA_INSTANCE.return_button.setVisibility(View.VISIBLE);
+        MA_INSTANCE.returnButton.setVisibility(View.VISIBLE);
         if(Saved_Plates.size()!=0){
             Saved_Plates=new ArrayList<>();
         }
@@ -334,9 +334,6 @@ public class PixelPicView extends View {
                 return true;
             }
         });
-    }
-    private static float dip2px(float dp){
-        return MA_INSTANCE.dip2px(dp);
     }
 
 }

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dream.mstudio.helper.FileHandle
 import com.dream.pixeldraw.AppGlobalData
-import com.dream.pixeldraw.MainActivity
 import com.dream.pixeldraw.adapter.FileChooseAdapter
 import com.dream.pixeldraw.databinding.ActivityFileChooseBinding
 import java.io.File
@@ -40,7 +39,7 @@ class FileChooseActivity : AppCompatActivity() {
                     binding.chooseList.adapter = anotherAdapter
                 } else if (File(globalList[position]).isFile){
                     if (singleFile.contains("png")){
-                        MainActivity.pathStr = binding.choosePath.text.toString() + "/" + singleFile
+                        pathStr = binding.choosePath.text.toString() + "/" + singleFile
                         AppGlobalData.MA_INSTANCE.onRead()
                         finish()
                     }
@@ -70,7 +69,7 @@ class FileChooseActivity : AppCompatActivity() {
                             binding.chooseList.adapter = anotherAdapter
                         } else if (File(partList[position]).isFile){
                             if (singleFile.contains("png")){
-                                MainActivity.pathStr = binding.choosePath.text.toString() + "/" + singleFile
+                                pathStr = binding.choosePath.text.toString() + "/" + singleFile
                                 AppGlobalData.MA_INSTANCE.onRead()
                                 finish()
                             }

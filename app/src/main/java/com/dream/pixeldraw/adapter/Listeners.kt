@@ -14,8 +14,8 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.Toast
 import com.dream.pixeldraw.AppGlobalData
-import com.dream.pixeldraw.MainActivity
 import com.dream.pixeldraw.R
+import com.dream.pixeldraw.activity.WorkActivity
 import com.dream.pixeldraw.ui.PixelPicView.OnPixelTouchListener
 import kotlin.math.*
 
@@ -27,9 +27,9 @@ object Listeners {
 
     fun getGraphToolOnClickListener(v: View, graph_id: Int): View.OnClickListener {
         return View.OnClickListener {
-            AppGlobalData.MA_INSTANCE.graph_tools[graph_id] =
-                !AppGlobalData.MA_INSTANCE.graph_tools[graph_id]
-            if (!AppGlobalData.MA_INSTANCE.graph_tools[graph_id]) {
+            AppGlobalData.MA_INSTANCE.graphTools[graph_id] =
+                !AppGlobalData.MA_INSTANCE.graphTools[graph_id]
+            if (!AppGlobalData.MA_INSTANCE.graphTools[graph_id]) {
                 resetListenersForGraphTools()
                 v.setBackgroundResource(R.drawable.shape_button_selected)
                 when (graph_id) {
@@ -69,7 +69,7 @@ object Listeners {
                 var th = 0f
                 while (th <= length) {
                     AppGlobalData.MA_INSTANCE.pic[x_0 + (x - x_0) * th / length, y_0 + (y - y_0) * th / length] =
-                        MainActivity.pen_color
+                        WorkActivity().penColor
                     th += 1f
                 }
             }
@@ -101,7 +101,7 @@ object Listeners {
                 val st = if (y_0 - y > 0) 1 else -1
                 for (i in 0 until abs(x_0 - x) + 1) for (i1 in 0 until abs(y_0 - y) + 1) {
                     AppGlobalData.MA_INSTANCE.pic[x_0 - s * i, y_0 - st * i1] =
-                        MainActivity.pen_color
+                        WorkActivity().penColor
                 }
             }
             if (motionEvent.action == MotionEvent.ACTION_UP) {
@@ -131,13 +131,13 @@ object Listeners {
                 val s = if (x_0 - x > 0) 1 else -1
                 val st = if (y_0 - y > 0) 1 else -1
                 for (i in 0 until abs(x_0 - x)) {
-                    AppGlobalData.MA_INSTANCE.pic[x_0 - i * s, y_0] = MainActivity.pen_color
-                    AppGlobalData.MA_INSTANCE.pic[x_0 - i * s, y] = MainActivity.pen_color
+                    AppGlobalData.MA_INSTANCE.pic[x_0 - i * s, y_0] = WorkActivity().penColor
+                    AppGlobalData.MA_INSTANCE.pic[x_0 - i * s, y] = WorkActivity().penColor
                 }
                 for (i in 0 until abs(y_0 - y)) AppGlobalData.MA_INSTANCE.pic[x_0, y_0 - i * st] =
-                    MainActivity.pen_color
+                    WorkActivity().penColor
                 for (i in 0 until abs(y_0 - y) + 1) AppGlobalData.MA_INSTANCE.pic[x, y_0 - i * st] =
-                    MainActivity.pen_color
+                    WorkActivity().penColor
             }
             if (motionEvent.action == MotionEvent.ACTION_UP) {
                 x_0 = 0
@@ -177,7 +177,7 @@ object Listeners {
                         x.toFloat(),
                         y.toFloat()
                     ) * 100000).roundToInt() / 100000).toFloat()
-                    AppGlobalData.MA_INSTANCE.pic[x_0 + sin, y_0 + cos] = MainActivity.pen_color
+                    AppGlobalData.MA_INSTANCE.pic[x_0 + sin, y_0 + cos] = WorkActivity().penColor
                     s += 0.1f
                 }
             }
@@ -219,7 +219,7 @@ object Listeners {
                             ((sin(s * 6 * Math.PI / 180) * i * 100000).roundToInt() / 100000).toFloat()
                         val cos =
                             ((cos(s * 6 * Math.PI / 180) * i * 100000).roundToInt() / 100000).toFloat()
-                        AppGlobalData.MA_INSTANCE.pic[x_0 + sin, y_0 + cos] = MainActivity.pen_color
+                        AppGlobalData.MA_INSTANCE.pic[x_0 + sin, y_0 + cos] = WorkActivity().penColor
                         i += 0.1f
                     }
                     s += 0.1f
@@ -235,8 +235,8 @@ object Listeners {
     }
 
     var selectListener = View.OnClickListener { view ->
-            if (!AppGlobalData.MA_INSTANCE.isEnable_select) {
-                MainActivity.enable_move = false
+            if (!AppGlobalData.MA_INSTANCE.isEnableSelect) {
+                WorkActivity().enableMove = false
                 view.setBackgroundResource(R.drawable.shape_button_selected)
                 AppGlobalData.MA_INSTANCE.pic.setOnPixelTouchListener(object :
                     OnPixelTouchListener() {
@@ -293,13 +293,13 @@ object Listeners {
                 })
             } else {
                 hasSelected = false
-                MainActivity.enable_move = true
+                WorkActivity().enableMove = true
                 AppGlobalData.MA_INSTANCE.pic.setOnPixelTouchListener(null)
                 AppGlobalData.MA_INSTANCE.pic.cleanSelectedPixels()
                 selectEditWin!!.dismiss()
                 view.setBackgroundResource(R.drawable.shape_button)
             }
-            AppGlobalData.MA_INSTANCE.isEnable_select = !AppGlobalData.MA_INSTANCE.isEnable_select
+            AppGlobalData.MA_INSTANCE.isEnableSelect = !AppGlobalData.MA_INSTANCE.isEnableSelect
         }
 
     @TargetApi(Build.VERSION_CODES.O)
@@ -307,23 +307,23 @@ object Listeners {
         AppGlobalData.MA_INSTANCE.tools = booleanArrayOf(false, false, false, false, false)
         AppGlobalData.MA_INSTANCE.pic.setOnPixelTouchListener(null)
         AppGlobalData.MA_INSTANCE.pic.setOnPixelClickListener(null)
-        AppGlobalData.MA_INSTANCE.button_pen.setBackgroundResource(R.drawable.shape_sel)
-        AppGlobalData.MA_INSTANCE.button_drawpen.setBackgroundResource(R.drawable.shape_sel)
-        AppGlobalData.MA_INSTANCE.button_eraser.setBackgroundResource(R.drawable.shape_sel)
-        AppGlobalData.MA_INSTANCE.button_bucket.setBackgroundResource(R.drawable.shape_sel)
-        AppGlobalData.MA_INSTANCE.button_colorpicker.setBackgroundResource(R.drawable.shape_sel)
+        AppGlobalData.MA_INSTANCE.buttonPen.setBackgroundResource(R.drawable.shape_sel)
+        AppGlobalData.MA_INSTANCE.buttonDrawPen.setBackgroundResource(R.drawable.shape_sel)
+        AppGlobalData.MA_INSTANCE.buttonEraser.setBackgroundResource(R.drawable.shape_sel)
+        AppGlobalData.MA_INSTANCE.buttonBucket.setBackgroundResource(R.drawable.shape_sel)
+        AppGlobalData.MA_INSTANCE.buttonColorPicker.setBackgroundResource(R.drawable.shape_sel)
     }
 
     @TargetApi(Build.VERSION_CODES.O)
     fun resetListenersForGraphTools() {
-        AppGlobalData.MA_INSTANCE.graph_tools = booleanArrayOf(false, false, false, false, false)
+        AppGlobalData.MA_INSTANCE.graphTools = booleanArrayOf(false, false, false, false, false)
         AppGlobalData.MA_INSTANCE.pic.setOnPixelTouchListener(null)
         AppGlobalData.MA_INSTANCE.pic.setOnPixelClickListener(null)
-        AppGlobalData.MA_INSTANCE.b_line.setBackgroundResource(R.drawable.shape_sel)
-        AppGlobalData.MA_INSTANCE.b_square.setBackgroundResource(R.drawable.shape_sel)
-        AppGlobalData.MA_INSTANCE.b_square_hol.setBackgroundResource(R.drawable.shape_sel)
-        AppGlobalData.MA_INSTANCE.b_circle.setBackgroundResource(R.drawable.shape_sel)
-        AppGlobalData.MA_INSTANCE.b_circle_hol.setBackgroundResource(R.drawable.shape_sel)
+        AppGlobalData.MA_INSTANCE.bline.setBackgroundResource(R.drawable.shape_sel)
+        AppGlobalData.MA_INSTANCE.bSquare.setBackgroundResource(R.drawable.shape_sel)
+        AppGlobalData.MA_INSTANCE.bSquareHol.setBackgroundResource(R.drawable.shape_sel)
+        AppGlobalData.MA_INSTANCE.bCircle.setBackgroundResource(R.drawable.shape_sel)
+        AppGlobalData.MA_INSTANCE.bCircleHol.setBackgroundResource(R.drawable.shape_sel)
     }
 
     private fun showSecPopWindow(layout_id: Int): PopupWindow {
@@ -379,7 +379,7 @@ object Listeners {
             for (i in select_start[0] until select_end[0] + 1) for (ii in select_start[1] until select_end[1] + 1) AppGlobalData.MA_INSTANCE.pic[i, ii] =
                 Color.TRANSPARENT
             Toast.makeText(AppGlobalData.MAIN_CONTEXT, "长按即可粘贴", Toast.LENGTH_SHORT).show()
-            AppGlobalData.MA_INSTANCE.button_select.performClick()
+            AppGlobalData.MA_INSTANCE.buttonSelect.performClick()
         }
         copyButton.setOnClickListener {
             AppGlobalData.copied_pic = AppGlobalData.MA_INSTANCE.pic.sliceAsBitmap(
@@ -389,7 +389,7 @@ object Listeners {
                 select_end[1] + 1
             )
             Toast.makeText(AppGlobalData.MAIN_CONTEXT, "长按即可粘贴", Toast.LENGTH_SHORT).show()
-            AppGlobalData.MA_INSTANCE.button_select.performClick()
+            AppGlobalData.MA_INSTANCE.buttonSelect.performClick()
         }
         return popupWindow
     }
