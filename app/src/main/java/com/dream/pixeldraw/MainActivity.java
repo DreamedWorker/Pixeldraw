@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
     public ColorListAdapter colorListAdapter=new ColorListAdapter(new ArrayList<>(), this);
     public Color al_color=Color.valueOf(0);
     public int color_picked;
-    public static MainActivity instance;
     public static String pathStr;
     public static int pen_color=0xFF000000;
     public static boolean enable_move=true;
@@ -81,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AppGlobalData.MAIN_CONTEXT=MainActivity.this;
-        AppGlobalData.MA_INSTANCE=MainActivity.this;
+//        AppGlobalData.MAIN_CONTEXT=MainActivity.this;
+//        AppGlobalData.MA_INSTANCE=MainActivity.this;
 
-        AppGlobalData.initailizeData();
+        AppGlobalData.initailizeData(MainActivity.this, MainActivity.this);
         AppGlobalData.initColorfulBar();
 
         AppGlobalData.addColColors(Color.BLACK);
