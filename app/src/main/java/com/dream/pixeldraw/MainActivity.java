@@ -39,7 +39,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import com.dream.pixeldraw.activity.AboutActivity;
-import com.dream.pixeldraw.activity.FileActivity;
+import com.dream.pixeldraw.activity.FileChooseActivity;
 import com.dream.pixeldraw.activity.FileSaveActivity;
 import com.dream.pixeldraw.adapter.ColorListAdapter;
 import com.dream.pixeldraw.adapter.Listeners;
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     public ImageButton button_pen,button_drawpen,button_eraser,button_bucket,button_colorpicker,b_line,b_square,b_square_hol,b_circle,b_circle_hol,return_button,undo_button;
     public DisplayMetrics displayMetrics=new DisplayMetrics();
     public ColorListAdapter colorListAdapter=new ColorListAdapter(new ArrayList<>(), this);
-    public Color al_color=Color.valueOf(00000000);
+    public Color al_color=Color.valueOf(0);
     public int color_picked;
     public static MainActivity instance;
     public static String pathStr;
@@ -362,12 +362,7 @@ public class MainActivity extends AppCompatActivity {
                                 }else pathStr=Environment.getExternalStorageDirectory().getPath();
                             }
                         });
-                        button_open_file.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                startActivity(new Intent(MainActivity.this, FileActivity.class));
-                            }
-                        });
+                        button_open_file.setOnClickListener(view1 -> startActivity(new Intent(MainActivity.this, FileChooseActivity.class)));
                         mainWin.dismiss();
                     }
                 });

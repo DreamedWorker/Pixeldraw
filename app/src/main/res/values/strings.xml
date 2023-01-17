@@ -21,4 +21,6 @@
     <string name="app_cancel">取消</string>
     <string name="copyright">版权所有</string>
     <string name="about">关于</string>
+    <string name="choose_back">回退</string>
+    <string name="choose_path">Path</string>
 </resources>
