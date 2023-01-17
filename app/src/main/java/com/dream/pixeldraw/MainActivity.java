@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 ImageButton button_B = mainView.findViewById(R.id.button3);
                 ImageButton button_settings=mainView.findViewById(R.id.button4);
                 button_select=bottomView.findViewById(R.id.button_select);
-                button_select.setOnClickListener(Listeners.selectListener);
+                button_select.setOnClickListener(Listeners.INSTANCE.getSelectListener());
                 button_settings.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -285,19 +285,19 @@ public class MainActivity extends AppCompatActivity {
                                 b_square_hol=graphView.findViewById(R.id.button_square_hol);
                                 b_circle=graphView.findViewById(R.id.button_circle);
                                 b_circle_hol=graphView.findViewById(R.id.button_circle_hol);
-                                b_line.setOnClickListener(Listeners.getGraphToolOnClickListener(b_line,0));
-                                b_square.setOnClickListener(Listeners.getGraphToolOnClickListener(b_square,1));
-                                b_square_hol.setOnClickListener(Listeners.getGraphToolOnClickListener(b_square_hol,2));
-                                b_circle.setOnClickListener(Listeners.getGraphToolOnClickListener(b_circle,3));
-                                b_circle_hol.setOnClickListener(Listeners.getGraphToolOnClickListener(b_circle_hol,4));
-                                Listeners.resetListenersForGraphTools();
+                                b_line.setOnClickListener(Listeners.INSTANCE.getGraphToolOnClickListener(b_line, 0));
+                                b_square.setOnClickListener(Listeners.INSTANCE.getGraphToolOnClickListener(b_square,1));
+                                b_square_hol.setOnClickListener(Listeners.INSTANCE.getGraphToolOnClickListener(b_square_hol,2));
+                                b_circle.setOnClickListener(Listeners.INSTANCE.getGraphToolOnClickListener(b_circle,3));
+                                b_circle_hol.setOnClickListener(Listeners.INSTANCE.getGraphToolOnClickListener(b_circle_hol,4));
+                                Listeners.INSTANCE.resetListenersForGraphTools();
                                 b_back.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        Listeners.resetListenersForGraphTools();
+                                        Listeners.INSTANCE.resetListenersForGraphTools();
                                         graphWin.dismiss();
                                         editWin.showAtLocation(getWindow().getDecorView(), Gravity.TOP | Gravity.START, 20, 20);
-                                        Listeners.resetListenersForTools();
+                                        Listeners.INSTANCE.resetListenersForTools();
                                     }
                                 });
                                 editWin.dismiss();
@@ -307,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 mainWin.showAtLocation(getWindow().getDecorView(), Gravity.TOP | Gravity.START, 20, 20);
-                                Listeners.resetListenersForTools();
+                                Listeners.INSTANCE.resetListenersForTools();
                                 enable_move=true;
                                 editWin.dismiss();
                                 colorWin.dismiss();
@@ -709,7 +709,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 tools[tool_id]=!tools[tool_id];
                 if(!tools[tool_id]) {
-                    Listeners.resetListenersForTools();
+                    Listeners.INSTANCE.resetListenersForTools();
                     view.setBackgroundResource(R.drawable.shape_button_selected);
                     switch (tool_id){
                         case 0:
