@@ -25,7 +25,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,7 +34,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
 
 import com.dream.pixeldraw.activity.AboutActivity;
 import com.dream.pixeldraw.activity.FileActivity;
@@ -43,12 +44,12 @@ import com.dream.pixeldraw.activity.FileSaveActivity;
 import com.dream.pixeldraw.adapter.ColorListAdapter;
 import com.dream.pixeldraw.adapter.Listeners;
 import com.dream.pixeldraw.ui.PixelPicView;
-import com.dream.pixeldraw.ui.SettingDialog;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @TargetApi(Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
@@ -685,22 +686,21 @@ public class MainActivity extends AppCompatActivity {
     }
     public void showNewFileDialog(){
         pathStr=null;
-        SettingDialog dialog=new SettingDialog(this,R.style.settingDialog_style);
-        dialog.setTitle("新建文件");
-        dialog.setContentView_(LayoutInflater.from(this).inflate(R.layout.dialog_new_file,null,true));
-        EditText lengthEdit=dialog.view.findViewById(R.id.length_edit);
-        EditText heightEdit=dialog.view.findViewById(R.id.height_edit);
-        lengthEdit.setText("16");heightEdit.setText("16");
-        dialog.setEnableButtonOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lengthEdit.getText().toString().length()!=0&&heightEdit.getText().toString().length()!=0) {
-                    Bitmap bitmap = Bitmap.createBitmap(Integer.parseInt(lengthEdit.getText().toString()), Integer.parseInt(heightEdit.getText().toString()), Bitmap.Config.ARGB_8888);
-                    pic.setInitBitmap(bitmap);
-                    dialog.dismiss();
-                }else Toast.makeText(MainActivity.this, "请输入尺寸", Toast.LENGTH_SHORT).show();
-            }
-        });
+        AppCompatEditText editText = new AppCompatEditText(MainActivity.this);
+        editText.setHint("图像大小");
+        editText.setTextSize(14f);
+        AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                .setTitle("新建文件")
+                .setMessage("输入一个整数，它代表图像的长和宽。我们将创建这个正方形图像，建议设为16。")
+                .setView(editText)
+                .setPositiveButton("确定", (dialog1, which) -> {
+                    if (Objects.requireNonNull(editText.getText()).toString().length() != 0){
+                        int widthAndHeight = Integer.parseInt(editText.getText().toString());
+                        Bitmap bitmapNew = Bitmap.createBitmap(widthAndHeight, widthAndHeight, Bitmap.Config.ARGB_8888);
+                        pic.setInitBitmap(bitmapNew);
+                    }
+                })
+                .setNegativeButton("取消", null).create();
         dialog.show();
     }
     public View.OnClickListener getToolOnClickListener(ImageButton view, final int tool_id){
