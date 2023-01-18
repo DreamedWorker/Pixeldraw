@@ -234,72 +234,72 @@ object Listeners {
     }
 
     var selectListener = View.OnClickListener { view ->
-            if (!AppGlobalData.MA_INSTANCE.isEnableSelect) {
-                WorkActivity().enableMove = false
-                view.setBackgroundResource(R.drawable.shape_button_selected)
-                AppGlobalData.MA_INSTANCE.pic.setOnPixelTouchListener(object :
-                    OnPixelTouchListener() {
-                    lateinit var pos: IntArray
-                    lateinit var stop_pos: IntArray
-                    lateinit var diff: IntArray
-                    lateinit var diff_end: IntArray
-                    lateinit var pos_mea: FloatArray
-                    override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
-                        if (!hasSelected) {
-                            AppGlobalData.MA_INSTANCE.pic.cleanSelectedPixels()
+        if (!AppGlobalData.MA_INSTANCE.isEnableSelect) {
+            WorkActivity().enableMove = false
+            view.setBackgroundResource(R.drawable.shape_button_selected)
+            AppGlobalData.MA_INSTANCE.pic.setOnPixelTouchListener(object :
+                OnPixelTouchListener() {
+                lateinit var pos: IntArray
+                lateinit var stop_pos: IntArray
+                lateinit var diff: IntArray
+                lateinit var diff_end: IntArray
+                lateinit var pos_mea: FloatArray
+                override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+                    if (!hasSelected) {
+                        AppGlobalData.MA_INSTANCE.pic.cleanSelectedPixels()
+                        if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
+                            if (selectEditWin != null) selectEditWin!!.dismiss()
+                            pos = intArrayOf(x, y)
+                            select_start = pos.clone()
+                        } else {
+                            AppGlobalData.MA_INSTANCE.pic.selectRectPixel(
+                                pos[0],
+                                pos[1],
+                                x + 1,
+                                y + 1
+                            )
+                            AppGlobalData.MA_INSTANCE.pic.renderSelectedPixels()
+                        }
+                        if (motionEvent.action == MotionEvent.ACTION_UP) {
+                            stop_pos = intArrayOf(x, y)
+                            select_end = stop_pos.clone()
+                            hasSelected = true
+                            pos_mea = floatArrayOf(motionEvent.rawX, motionEvent.rawY)
+                            selectEditWin = showSecPopWindow(R.layout.popupwin_select_edit_tools)
+                        }
+                    } else {
+                        if (x >= pos[0] && x <= stop_pos[0] && y >= pos[1] && y <= stop_pos[1]) {
                             if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
-                                if (selectEditWin != null) selectEditWin!!.dismiss()
-                                pos = intArrayOf(x, y)
-                                select_start = pos.clone()
-                            } else {
+                                diff = intArrayOf(pos[0] - x, pos[1] - y)
+                                diff_end = intArrayOf(stop_pos[0] - x, stop_pos[1] - y)
+                            }
+                            if (motionEvent.action == MotionEvent.ACTION_MOVE) {
+                                pos[0] = diff[0] + x
+                                pos[1] = diff[1] + y
+                                stop_pos[0] = diff_end[0] + x
+                                stop_pos[1] = diff_end[1] + y
+                                AppGlobalData.MA_INSTANCE.pic.cleanSelectedPixels()
                                 AppGlobalData.MA_INSTANCE.pic.selectRectPixel(
                                     pos[0],
-                                    pos[1],
-                                    x + 1,
-                                    y + 1
+                                    pos[1], stop_pos[0] + 1, stop_pos[1] + 1
                                 )
                                 AppGlobalData.MA_INSTANCE.pic.renderSelectedPixels()
                             }
-                            if (motionEvent.action == MotionEvent.ACTION_UP) {
-                                stop_pos = intArrayOf(x, y)
-                                select_end = stop_pos.clone()
-                                hasSelected = true
-                                pos_mea = floatArrayOf(motionEvent.rawX, motionEvent.rawY)
-                                selectEditWin = showSecPopWindow(R.layout.popupwin_select_edit_tools)
-                            }
-                        } else {
-                            if (x >= pos[0] && x <= stop_pos[0] && y >= pos[1] && y <= stop_pos[1]) {
-                                if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
-                                    diff = intArrayOf(pos[0] - x, pos[1] - y)
-                                    diff_end = intArrayOf(stop_pos[0] - x, stop_pos[1] - y)
-                                }
-                                if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-                                    pos[0] = diff[0] + x
-                                    pos[1] = diff[1] + y
-                                    stop_pos[0] = diff_end[0] + x
-                                    stop_pos[1] = diff_end[1] + y
-                                    AppGlobalData.MA_INSTANCE.pic.cleanSelectedPixels()
-                                    AppGlobalData.MA_INSTANCE.pic.selectRectPixel(
-                                        pos[0],
-                                        pos[1], stop_pos[0] + 1, stop_pos[1] + 1
-                                    )
-                                    AppGlobalData.MA_INSTANCE.pic.renderSelectedPixels()
-                                }
-                            }
                         }
-                        super.onTouch(view, motionEvent, x, y)
                     }
-                })
-            } else {
-                hasSelected = false
-                WorkActivity().enableMove = true
-                AppGlobalData.MA_INSTANCE.pic.setOnPixelTouchListener(null)
-                AppGlobalData.MA_INSTANCE.pic.cleanSelectedPixels()
-                selectEditWin!!.dismiss()
-                view.setBackgroundResource(R.drawable.shape_button)
-            }
-            AppGlobalData.MA_INSTANCE.isEnableSelect = !AppGlobalData.MA_INSTANCE.isEnableSelect
+                    super.onTouch(view, motionEvent, x, y)
+                }
+            })
+        } else {
+            hasSelected = false
+            WorkActivity().enableMove = true
+            AppGlobalData.MA_INSTANCE.pic.setOnPixelTouchListener(null)
+            AppGlobalData.MA_INSTANCE.pic.cleanSelectedPixels()
+            selectEditWin!!.dismiss()
+            view.setBackgroundResource(R.drawable.shape_button)
         }
+        AppGlobalData.MA_INSTANCE.isEnableSelect = !AppGlobalData.MA_INSTANCE.isEnableSelect
+    }
 
     @TargetApi(Build.VERSION_CODES.O)
     fun resetListenersForTools() {
