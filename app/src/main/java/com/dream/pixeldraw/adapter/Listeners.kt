@@ -16,7 +16,7 @@ import android.widget.Toast
 import com.dream.pixeldraw.AppGlobalData
 import com.dream.pixeldraw.R
 import com.dream.pixeldraw.activity.WorkActivity
-import com.dream.pixeldraw.ui.PixelPicView.OnPixelTouchListener
+import com.dream.pixeldraw.view.PixelPicView.OnPixelTouchListener
 import kotlin.math.*
 
 object Listeners {
@@ -48,21 +48,20 @@ object Listeners {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.O)
     private var LineListener: OnPixelTouchListener = object : OnPixelTouchListener() {
         private var x_0 = 0
         private var y_0 = 0
         private var last_bmp: Bitmap? = null
-
-        @TargetApi(Build.VERSION_CODES.O)
-        override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
-            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+        override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+            if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
                 AppGlobalData.MA_INSTANCE.pic.loadHistoryBitmap()
-                last_bmp = AppGlobalData.MA_INSTANCE.pic.bitmap
+                last_bmp = AppGlobalData.MA_INSTANCE.pic.getBitmap()
                 x_0 = x
                 y_0 = y
             }
             if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-                AppGlobalData.MA_INSTANCE.pic.updateBitmap(last_bmp)
+                AppGlobalData.MA_INSTANCE.pic.updateBitmap(last_bmp!!)
                 val length = sqrt(
                     ((if (x_0 - x == 0) 1 else x_0 - x.toDouble()) as Double).pow(2.0) +
                             ((if (y_0 - y == 0) 1 else y_0 - y.toDouble()) as Double).pow(2.0)).toFloat()
@@ -88,15 +87,15 @@ object Listeners {
         private var last_bmp: Bitmap? = null
 
         @TargetApi(Build.VERSION_CODES.O)
-        override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
-            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+        override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+            if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
                 AppGlobalData.MA_INSTANCE.pic.loadHistoryBitmap()
-                last_bmp = AppGlobalData.MA_INSTANCE.pic.bitmap
+                last_bmp = AppGlobalData.MA_INSTANCE.pic.getBitmap()
                 x_0 = x
                 y_0 = y
             }
             if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-                AppGlobalData.MA_INSTANCE.pic.updateBitmap(last_bmp)
+                AppGlobalData.MA_INSTANCE.pic.updateBitmap(last_bmp!!)
                 val s = if (x_0 - x > 0) 1 else -1
                 val st = if (y_0 - y > 0) 1 else -1
                 for (i in 0 until abs(x_0 - x) + 1) for (i1 in 0 until abs(y_0 - y) + 1) {
@@ -119,15 +118,15 @@ object Listeners {
         private var last_bmp: Bitmap? = null
 
         @TargetApi(Build.VERSION_CODES.O)
-        override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
-            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+        override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+            if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
                 AppGlobalData.MA_INSTANCE.pic.loadHistoryBitmap()
-                last_bmp = AppGlobalData.MA_INSTANCE.pic.bitmap
+                last_bmp = AppGlobalData.MA_INSTANCE.pic.getBitmap()
                 x_0 = x
                 y_0 = y
             }
             if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-                AppGlobalData.MA_INSTANCE.pic.updateBitmap(last_bmp)
+                last_bmp?.let { AppGlobalData.MA_INSTANCE.pic.updateBitmap(it) }
                 val s = if (x_0 - x > 0) 1 else -1
                 val st = if (y_0 - y > 0) 1 else -1
                 for (i in 0 until abs(x_0 - x)) {
@@ -154,15 +153,15 @@ object Listeners {
         private var last_bmp: Bitmap? = null
 
         @TargetApi(Build.VERSION_CODES.O)
-        override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
-            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+        override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+            if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
                 AppGlobalData.MA_INSTANCE.pic.loadHistoryBitmap()
-                last_bmp = AppGlobalData.MA_INSTANCE.pic.bitmap
+                last_bmp = AppGlobalData.MA_INSTANCE.pic.getBitmap()
                 x_0 = x
                 y_0 = y
             }
             if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-                AppGlobalData.MA_INSTANCE.pic.updateBitmap(last_bmp)
+                last_bmp?.let { AppGlobalData.MA_INSTANCE.pic.updateBitmap(it) }
                 var s = 0f
                 while (s < 60) {
                     val sin = ((sin(s * 6 * Math.PI / 180) * AppGlobalData.MA_INSTANCE.getDistance(
@@ -196,15 +195,15 @@ object Listeners {
         private var last_bmp: Bitmap? = null
 
         @TargetApi(Build.VERSION_CODES.O)
-        override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
-            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+        override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+            if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
                 AppGlobalData.MA_INSTANCE.pic.loadHistoryBitmap()
-                last_bmp = AppGlobalData.MA_INSTANCE.pic.bitmap
+                last_bmp = AppGlobalData.MA_INSTANCE.pic.getBitmap()
                 x_0 = x
                 y_0 = y
             }
             if (motionEvent.action == MotionEvent.ACTION_MOVE) {
-                AppGlobalData.MA_INSTANCE.pic.updateBitmap(last_bmp)
+                last_bmp?.let { AppGlobalData.MA_INSTANCE.pic.updateBitmap(it) }
                 var s = 0f
                 while (s < 60) {
                     var i = 1f
@@ -245,10 +244,10 @@ object Listeners {
                     lateinit var diff: IntArray
                     lateinit var diff_end: IntArray
                     lateinit var pos_mea: FloatArray
-                    override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
+                    override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
                         if (!hasSelected) {
                             AppGlobalData.MA_INSTANCE.pic.cleanSelectedPixels()
-                            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                            if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
                                 if (selectEditWin != null) selectEditWin!!.dismiss()
                                 pos = intArrayOf(x, y)
                                 select_start = pos.clone()
@@ -270,7 +269,7 @@ object Listeners {
                             }
                         } else {
                             if (x >= pos[0] && x <= stop_pos[0] && y >= pos[1] && y <= stop_pos[1]) {
-                                if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+                                if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
                                     diff = intArrayOf(pos[0] - x, pos[1] - y)
                                     diff_end = intArrayOf(stop_pos[0] - x, stop_pos[1] - y)
                                 }
@@ -347,25 +346,27 @@ object Listeners {
         val cutButton = view.findViewById<ImageButton>(R.id.button_cut)
         val copyButton = view.findViewById<ImageButton>(R.id.button_copy)
         sliceButton.setOnClickListener {
-            AppGlobalData.MA_INSTANCE.pic.setInitBitmap(
-                AppGlobalData.MA_INSTANCE.pic.sliceAsBitmap(
-                    select_start[0],
-                    select_start[1],
-                    select_end[0] + 1,
-                    select_end[1] + 1
+            AppGlobalData.MA_INSTANCE.pic.sliceAsBitmap(
+                select_start[0],
+                select_start[1],
+                select_end[0] + 1,
+                select_end[1] + 1
+            )?.let { it1 ->
+                AppGlobalData.MA_INSTANCE.pic.setInitBitmap(
+                    it1
                 )
-            )
+            }
             AppGlobalData.MA_INSTANCE.pic.cleanSelectedPixels()
             select_start = intArrayOf(0, 0)
             select_end = intArrayOf(
-                AppGlobalData.MA_INSTANCE.pic.widthPixels - 1,
-                AppGlobalData.MA_INSTANCE.pic.heightPixels - 1
+                AppGlobalData.MA_INSTANCE.pic.mWidthPixels - 1,
+                AppGlobalData.MA_INSTANCE.pic.mHeightPixels - 1
             )
             AppGlobalData.MA_INSTANCE.pic.selectRectPixel(
                 0,
                 0,
-                AppGlobalData.MA_INSTANCE.pic.widthPixels,
-                AppGlobalData.MA_INSTANCE.pic.heightPixels
+                AppGlobalData.MA_INSTANCE.pic.mWidthPixels,
+                AppGlobalData.MA_INSTANCE.pic.mHeightPixels
             )
             AppGlobalData.MA_INSTANCE.pic.renderSelectedPixels()
         }

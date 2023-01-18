@@ -37,8 +37,8 @@ import com.dream.pixeldraw.adapter.Listeners.resetListenersForGraphTools
 import com.dream.pixeldraw.adapter.Listeners.resetListenersForTools
 import com.dream.pixeldraw.adapter.Listeners.selectListener
 import com.dream.pixeldraw.databinding.ActivityMainBinding
-import com.dream.pixeldraw.ui.PixelPicView
-import com.dream.pixeldraw.ui.PixelPicView.OnPixelTouchListener
+import com.dream.pixeldraw.view.PixelPicView
+import com.dream.pixeldraw.view.PixelPicView.OnPixelTouchListener
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -140,7 +140,7 @@ class WorkActivity : AppCompatActivity() {
             if (event.actionMasked == MotionEvent.ACTION_MOVE) {
                 val distence: Float =
                     getDistance(event.getX(0), event.getY(0), event.getX(1), event.getY(1))
-                val pixelSize: Float = pic.scaleX * dip2px(300f) / pic.widthPixels
+                val pixelSize: Float = pic.scaleX * dip2px(300f) / pic.mWidthPixels
                 if (orginalSize[0] + (distence - orginalDistance) / 300 > 0) {
                     pic.scaleX = orginalSize[0] + (distence - orginalDistance) / 300
                     pic.scaleY = orginalSize[1] + (distence - orginalDistance) / 300
@@ -381,7 +381,7 @@ class WorkActivity : AppCompatActivity() {
             val saveFile = File(newPath)
             if (!saveFile.exists()) saveFile.createNewFile()
             val outputStream = FileOutputStream(saveFile)
-            pic.bitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream)
+            pic.getBitmap().compress(Bitmap.CompressFormat.PNG, 80, outputStream)
             outputStream.flush()
             outputStream.close()
         } catch (e: IOException) {
@@ -452,8 +452,8 @@ class WorkActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setListener(screen: FrameLayout) {
         onPixelClickListener = object : OnPixelTouchListener() {
-            override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
-                if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+            override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+                if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
                     pic.loadHistoryBitmap()
                     pic.set(x, y, penColor)
                 }
@@ -461,16 +461,16 @@ class WorkActivity : AppCompatActivity() {
             }
         }
         onPixelTouchListener = object : OnPixelTouchListener() {
-            override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
-                if (motionEvent.action == MotionEvent.ACTION_DOWN) pic.loadHistoryBitmap() else pic.set(x, y,
+            override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+                if (motionEvent!!.action == MotionEvent.ACTION_DOWN) pic.loadHistoryBitmap() else pic.set(x, y,
                     penColor
                 )
                 super.onTouch(view, motionEvent, x, y)
             }
         }
         onEraserUseClickListener = object : OnPixelTouchListener() {
-            override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
-                if (motionEvent.action == MotionEvent.ACTION_DOWN) pic.loadHistoryBitmap() else pic[x, y] =
+            override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+                if (motionEvent!!.action == MotionEvent.ACTION_DOWN) pic.loadHistoryBitmap() else pic[x, y] =
                     Color.TRANSPARENT
                 super.onTouch(view, motionEvent, x, y)
             }
@@ -479,14 +479,14 @@ class WorkActivity : AppCompatActivity() {
             private var originalColor = 0
             fun loop(x: Int, y: Int): Int {
                 pic.set(x, y, penColor)
-                if (x + 1 < pic.widthPixels && pic[x + 1, y] == originalColor) loop(x + 1, y)
+                if (x + 1 < pic.mWidthPixels && pic[x + 1, y] == originalColor) loop(x + 1, y)
                 if (x - 1 >= 0 && pic[x - 1, y] == originalColor) loop(x - 1, y)
-                if (y + 1 < pic.heightPixels && pic[x, y + 1] == originalColor) loop(x, y + 1)
+                if (y + 1 < pic.mHeightPixels && pic[x, y + 1] == originalColor) loop(x, y + 1)
                 if (y - 1 >= 0 && pic[x, y - 1] == originalColor) loop(x, y - 1)
                 return 0
             }
-            override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
-                if (motionEvent.action == MotionEvent.ACTION_UP) {
+            override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+                if (motionEvent!!.action == MotionEvent.ACTION_UP) {
                     pic.loadHistoryBitmap()
                     originalColor = pic[x, y]
                     Thread {
@@ -502,8 +502,8 @@ class WorkActivity : AppCompatActivity() {
             }
         }
         onColorPickerUseListener = object : OnPixelTouchListener() {
-            override fun onTouch(view: View, motionEvent: MotionEvent, x: Int, y: Int) {
-                if (motionEvent.action == MotionEvent.ACTION_UP) {
+            override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
+                if (motionEvent!!.action == MotionEvent.ACTION_UP) {
                     colorListAdapter.addColor(pic[x, y])
                     buttonColorList.adapter = colorListAdapter
                     penColor = pic[x, y]
@@ -512,11 +512,11 @@ class WorkActivity : AppCompatActivity() {
             }
         }
         screen.post {
-            pic.heightPixels = 16
-            pic.widthPixels = 16
+            pic.mHeightPixels = 16
+            pic.mWidthPixels = 16
             pic.updateCanvas()
             colorListAdapter.addColor(Color.BLACK)
-            pixelSize0 = pic.scaleX * dip2px(300f) / pic.widthPixels
+            pixelSize0 = pic.scaleX * dip2px(300f) / pic.mWidthPixels
             mainWin = showMainPopWindow(R.layout.popupwin)
             bottomWin = showBottomWindow(R.layout.popupwin_bottom)
             val mainView = mainWin!!.contentView
