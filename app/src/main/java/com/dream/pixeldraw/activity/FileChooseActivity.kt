@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dream.mstudio.helper.FileHandle
+import com.dream.pixeldraw.helper.FileHandle
 import com.dream.pixeldraw.AppGlobalData
 import com.dream.pixeldraw.adapter.FileChooseAdapter
 import com.dream.pixeldraw.databinding.ActivityFileChooseBinding

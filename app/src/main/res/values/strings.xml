@@ -29,4 +29,20 @@
     <string name="copyright">此软件基于AGPL-3.0协议开源与Github，使用、复制、修改、发布此软件及其副本请遵循此协定。</string>
     <string name="about_more">了解更多</string>
     <string name="about_version">Version 0.0.1</string>
+
+    <string name="title_activity_settings">首选项</string>
+    <string name="messages_header">通用</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">画布颜色</string>
+    <string name="reply_title">170,170,170</string>
+    <string name="reply_hint">颜色数码使用rgb格式，用英文逗号分开</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

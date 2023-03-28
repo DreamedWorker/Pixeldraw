@@ -1,4 +1,4 @@
-package com.dream.mstudio.helper
+package com.dream.pixeldraw.helper
 
 import android.content.ContentResolver
 import android.content.ContentUris

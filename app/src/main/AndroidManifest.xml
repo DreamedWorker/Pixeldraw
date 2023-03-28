@@ -19,7 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pixeldraw"
         tools:targetApi="33">
-        <activity android:name=".activity.WorkActivity"
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".activity.WorkActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

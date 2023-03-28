@@ -29,7 +29,6 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.preference.PreferenceManager
 import com.dream.pixeldraw.AppGlobalData
 import com.dream.pixeldraw.AppGlobalData.makeAlphaPlane
 import com.dream.pixeldraw.AppGlobalData.makeBrightnessPlane
@@ -199,6 +198,23 @@ class WorkActivity : AppCompatActivity() {
         }
         return super.onTouchEvent(event)
     }
+
+//    private fun showMainPopWindow(layout_id: Int): PopupWindow {
+//        val inflater = LayoutInflater.from(this@WorkActivity)
+//        val popupWindow = PopupWindow(
+//            LinearLayout.LayoutParams.WRAP_CONTENT,
+//            LinearLayout.LayoutParams.WRAP_CONTENT
+//        )
+//        val view = inflater.inflate(layout_id, null, true)
+//        popupWindow.contentView = view
+//        //popupWindow.setOutsideTouchable(true);
+//        popupWindow.isFocusable = false
+//        popupWindow.animationStyle = R.style.popupWindow
+//        popupWindow.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        popupWindow.showAtLocation(window.decorView, Gravity.TOP or Gravity.START, 20, 20)
+//        return popupWindow
+//    }
+
     private fun showSecPopWindow(layout_id: Int): PopupWindow {
         val inflater = LayoutInflater.from(this@WorkActivity)
         val popupWindow = PopupWindow(
@@ -432,19 +448,17 @@ class WorkActivity : AppCompatActivity() {
 
     fun onRead(newPath: String) {
         Toast.makeText(applicationContext, "打开中", Toast.LENGTH_SHORT).show()
-        Thread{
-            if (File(newPath).exists()) {
-                bitmap = BitmapFactory.decodeFile(newPath)
-                if (bitmap != null){
-                    pathStr = newPath
-                    runOnUiThread { pic.setInitBitmap(bitmap) }
-                } else {
-                    runOnUiThread { Toast.makeText(applicationContext, "打开失败", Toast.LENGTH_SHORT).show() }
-                }
+        if (File(newPath).exists()) {
+            bitmap = BitmapFactory.decodeFile(newPath)
+            if (bitmap != null){
+                pic.setInitBitmap(bitmap)
+                pathStr = newPath
             } else {
-                runOnUiThread { Toast.makeText(applicationContext, "打开失败", Toast.LENGTH_SHORT).show() }
+                Toast.makeText(applicationContext, "打开失败", Toast.LENGTH_SHORT).show()
             }
-        }.start()
+        } else {
+            Toast.makeText(applicationContext, "打开失败", Toast.LENGTH_SHORT).show()
+        }
     }
 
     @Suppress("NAME_SHADOWING")
@@ -471,9 +485,6 @@ class WorkActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setListener(screen: FrameLayout) {
-        val sp = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        val bg = sp.getString("signature", "170,170,170")!!.split(",")
-        screen.setBackgroundColor(Color.rgb(bg[0].toInt(),bg[1].toInt(),bg[2].toInt()))
         onPixelClickListener = object : OnPixelTouchListener() {
             override fun onTouch(view: View?, motionEvent: MotionEvent?, x: Int, y: Int) {
                 if (motionEvent!!.action == MotionEvent.ACTION_DOWN) {
@@ -551,7 +562,7 @@ class WorkActivity : AppCompatActivity() {
             buttonSelect = bottomView.findViewById(R.id.button_select)
             buttonSelect.setOnClickListener(selectListener)
             buttonSettings.setOnClickListener {
-                startActivity(Intent(applicationContext, SettingsActivity::class.java))
+                startActivity(Intent(applicationContext, AboutActivity::class.java))
             }
             buttonC.setOnClickListener {
                 startActivity(Intent(applicationContext, AboutActivity::class.java))
