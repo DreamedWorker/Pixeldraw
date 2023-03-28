@@ -523,10 +523,14 @@ class WorkActivity : AppCompatActivity() {
             val bottomView = bottomWin!!.contentView
             val buttonA = mainView.findViewById<ImageButton>(R.id.button2)
             val buttonB = mainView.findViewById<ImageButton>(R.id.button3)
+            val buttonC = mainView.findViewById<ImageButton>(R.id.button)
             val buttonSettings = mainView.findViewById<ImageButton>(R.id.button4)
             buttonSelect = bottomView.findViewById(R.id.button_select)
             buttonSelect.setOnClickListener(selectListener)
             buttonSettings.setOnClickListener {
+                startActivity(Intent(applicationContext, AboutActivity::class.java))
+            }
+            buttonC.setOnClickListener {
                 startActivity(Intent(applicationContext, AboutActivity::class.java))
             }
             buttonA.setOnClickListener {

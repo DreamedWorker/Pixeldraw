@@ -19,10 +19,14 @@
     <string name="popwin_select">选择</string>
     <string name="popwin_color">选择颜色</string>
     <string name="app_cancel">取消</string>
-    <string name="copyright">版权所有</string>
     <string name="about">关于</string>
     <string name="choose_back">回退</string>
     <string name="choose_path">Path</string>
     <string name="save_name">文件名（无需拓展名）</string>
     <string name="save_confirm">保存</string>
+
+    <string name="about_subtitle">一款现代化的我的世界像素图标设计软件</string>
+    <string name="copyright">此软件基于AGPL-3.0协议开源与Github，使用、复制、修改、发布此软件及其副本请遵循此协定。</string>
+    <string name="about_more">了解更多</string>
+    <string name="about_version">Version 0.0.1</string>
 </resources>
